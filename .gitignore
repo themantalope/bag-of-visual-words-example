@@ -1,0 +1,11 @@
+# don't include data dir
+data*
+
+# don't include egg files
+*egg*
+
+# don't inlcude ipynotebook checkpoints
+*pynb_checkpoints*
+
+# don't include pycaches
+*pycache*
