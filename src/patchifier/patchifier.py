@@ -15,16 +15,23 @@ def _patch_generator(im_shape,
     if not _check_overlap(x_overlap) or not _check_overlap(y_overlap):
         raise TypeError("'x_overlap' and 'y_overlap' must be in (0.0, 1.0)")
 
-    x_step = int(math.floor(patch_shape[0] * x_overlap))
-    y_step = int(math.floor(patch_shape[1] * y_overlap))
+    x_size = patch_shape[1]
+    y_size = patch_shape[0]
+    x_step = int(math.floor(patch_shape[1] * x_overlap))
+    y_step = int(math.floor(patch_shape[0] * y_overlap))
 
     im_width = im_shape[1]
     im_height = im_shape[0]
 
 
-    for i in range(0, im_width-x_step, x_step):
-        for j in range(0, im_height-y_step, y_step):
-            yield (i, i+x_step, j, j+y_step)
+    for i in range(0, im_width-x_size, x_step):
+        for j in range(0, im_height-y_size, y_step):
+            x_start = i
+            x_end = min(i+x_size, im_shape[1])
+
+            y_start = j
+            y_end = min(j+y_size, im_shape[0])
+            yield (i, i+x_size, j, j+y_size)
 
 def _multiscale_patch_generator(im_shape,
                                 largest_patch_size,

@@ -1,1 +1,1 @@
-from .bagofvisualwords import BOVW
+from .bagofvisualwords import BOVW, point_in_patch
